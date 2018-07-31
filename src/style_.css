@@ -1,0 +1,266 @@
+* {
+    font-family: 'Lato';
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #222;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ddd;
+}
+
+
+body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow-y: hidden;
+}
+
+#forward-list {
+    position: relative;
+    float: left;
+    width: 46%;
+    height: 96%;
+    margin: 1%;
+    border-radius: 2px;
+    border: 2px solid #1976D2;
+    background-color: #222;
+}
+
+#list {
+    position: relative;
+    margin: 0 auto;
+    padding: 3%;
+    max-height: 95%;
+    overflow-y: auto;
+}
+
+.item {
+    position: relative;
+    list-style: none;
+    background-color: rgba(25, 118, 210, 0.90);
+    background-image: linear-gradient(
+            270deg,
+            #e80000 42px,
+            #EEE 10px,
+            #EEE 11px,
+            transparent 11px);
+    padding: 12px 45px 12px 12px;
+    margin-bottom: 5px;
+    min-height: 40px;
+    cursor: default;
+    transition: .3s all ease;
+    opacity: 0;
+}
+
+.item > i.fa-exchange-alt {
+    position: absolute;
+    top: 50%;
+    margin: -8px 0 0 2px;
+    color: #fff;
+    pointer-events: none
+}
+
+.item > i.fa-trash-alt {
+    position: absolute;
+    font-size: 20px;
+    width: 18px;
+    transition: .5s;
+    right: 0;
+    top: 50%;
+    margin: -8px 11px 0 0;
+    color: #fff;
+    cursor: pointer;
+}
+
+.item > i.fa-trash-alt:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.item > div {
+    margin: 0 0 0 30px;
+}
+
+.item > div > span {
+    position: absolute;
+    display: inline;
+    margin: 6px 0 6px 0;
+    color: whitesmoke;
+    font-weight: bolder;
+}
+
+.item > div > span.listen-label {
+    top: 0;
+}
+
+.item > div > span.connect-label {
+    bottom: 0;
+}
+
+#loader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    margin-top: -15px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity .5s linear;
+}
+
+#forward-template {
+    width: 50%;
+    height: 100%;
+    float: right;
+    background-color: transparent;
+}
+
+.forward-input {
+    position: relative;
+    margin: 50px 35px 50px 25px;
+}
+
+input {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 310px;
+    border: none;
+    border-bottom: 1px solid #757575;
+}
+
+input:focus {
+    outline: none;
+}
+
+label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label {
+    top: -20px;
+    font-size: 14px;
+    color: #1976D2;
+}
+
+.bar {
+    position: relative;
+    display: block;
+    width: 310px;
+    padding-left: 15px;
+}
+
+.bar:before, .bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #1976D2;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%;
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+    width: 50%;
+}
+
+#add-btn {
+    width: 300px;
+    height: 80px;
+    outline: none;
+    cursor: pointer;
+    background: none;
+    transition: .5s;
+    font-size: 24px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    position: relative;
+    margin-left: 40px;
+    border: 2px solid #1976D2;
+    color: #1976D2;
+}
+
+#add-btn:hover {
+    border: none;
+    font-size: 28px;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    color: white;
+    background-color: #1976D2;
+}
+
+#snackbar {
+    bottom: 0;
+    z-index: 3;
+    width: 100%;
+    height: 0px;
+    line-height: 50px;
+    position: absolute;
+    background-color: white;
+    transition: all .3s;
+    border-top: 0px;
+    overflow: hidden;
+}
+
+#snackbar.active {
+    height: 50px;
+    border-top: 2px solid #222222;
+}
+
+#snackbar > span {
+    border: 0;
+    float: left;
+    color: #222222;
+    cursor: pointer;
+    font-size: 15px;
+    margin-left: 3%;
+    font-weight: bold;
+    font-family: 'Lato';
+    pointer-events: none;
+    background: transparent;
+    text-transform: uppercase;
+}
+
+#none {
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    margin-top: -15px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Lato';
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity .5s linear;
+}
