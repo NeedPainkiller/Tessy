@@ -18,45 +18,38 @@
     <div id="tesseract-img">
         <div id="box">
             <div id="js--image-preview">
-                <input type="file" id="image-upload" accept="image/*"/></div>
+                <i class="fas fa-image"></i>
+                <input type="file" id="image-upload" accept="image/*"/>
+            </div>
         </div>
-        <!--<div id="loader">-->
-        <!--<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"-->
-        <!--width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">-->
-        <!--<rect x="0" y="0" width="4" height="20" fill="#1976D2">-->
-        <!--<animate attributeName="opacity" attributeType="XML"-->
-        <!--values="1; .2; 1"-->
-        <!--begin="0s" dur="0.6s" repeatCount="indefinite" />-->
-        <!--</rect>-->
-        <!--<rect x="7" y="0" width="4" height="20" fill="#1976D2">-->
-        <!--<animate attributeName="opacity" attributeType="XML"-->
-        <!--values="1; .2; 1"-->
-        <!--begin="0.2s" dur="0.6s" repeatCount="indefinite" />-->
-        <!--</rect>-->
-        <!--<rect x="14" y="0" width="4" height="20" fill="#1976D2">-->
-        <!--<animate attributeName="opacity" attributeType="XML"-->
-        <!--values="1; .2; 1"-->
-        <!--begin="0.4s" dur="0.6s" repeatCount="indefinite" />-->
-        <!--</rect>-->
-        <!--</svg>-->
-        <!--</div>-->
     </div>
     <div id="tesseract-option">
+        <div class="forward-input">
+            <input type="text" class="option" id="tesseract-path" required>
+            <span class="bar"></span>
+            <label>&nbsp<i class="fas fa-folder-open"></i>&nbsp Tesseract path (C:\Program Files
+                (x86)\Tesseract-OCR\tesseract)</label>
+        </div>
+        <div class="forward-input">
+            <input type="text" class="option" i id="tesseract-language" required>
+            <span class="bar"></span>
+            <label>&nbsp<i class="fas fa-globe"></i>&nbsp&nbsp Language (Default : eng)</label>
+        </div>
         <select id="psm">
-            <option value="0">방향 및 스크립트 감지(OSD)만 해당됩니다</option>
+            <option value="0">방향 및 스크립트 감지(OSD)</option>
             <option value="1">OSD로 자동 페이지 분할</option>
             <option value="2">자동 페이지 분할. OSD나 OCR은 없음</option>
-            <option value="3" selected="selected">완전히 자동으로 페이지 분할되지만 OSD는 없습니다.(기본 값)</option>
-            <option value="4">다양한 크기의 텍스트로 이루어진 단일 열을 가정한다</option>
-            <option value="5">수직 정렬 텍스트의 단일 균일 블록을 가정한다</option>
-            <option value="6">텍스트의 균일한 단일 블록을 가정한다</option>
-            <option value="7">영상을 단일 텍스트 선으로 처리합니다</option>
-            <option value="8">이미지를 단일 단어로 처리합니다</option>
-            <option value="9">이미지를 원으로 하나의 단어로 처리합니다</option>
-            <option value="10">이미지를 단일 문자로 처리합니다</option>
-            <option value="11">sparse텍스트. 어떤 순서로도 가능한 한 많은 텍스트를 찾을 수 없습니다</option>
-            <option value="12">OSD로 텍스트를 넘깁니다</option>
-            <option value="13">원시 선. 이미지를 단일 텍스트 줄로 처리합니다</option>
+            <option value="3" selected="selected">완전히 자동으로 페이지 분할, OSD 없음.(기본 값)</option>
+            <option value="4">가변적인 크기의 1라인 텍스트</option>
+            <option value="5">수직 텍스트</option>
+            <option value="6">텍스트의 균일한 단일 블록을 가정</option>
+            <option value="7">1 Line 텍스트로 처리</option>
+            <option value="8">1 단어로 처리</option>
+            <option value="9">원 안의 1 단어로 처리</option>
+            <option value="10">1 문자로 처리</option>
+            <option value="11">SPARSE, 특정 순서없이 가능한 한 많은 텍스트 찾기</option>
+            <option value="12">OSD 가 포함된 SPARSE</option>
+            <option value="13">원시 라인, 이미지를 단일 텍스트로 처리</option>
         </select>
         <select id="oem">
             <option value="0">기존엔진 사용</option>
@@ -64,15 +57,26 @@
             <option value="2">기존엔진 + LSTM엔진</option>
             <option value="3" selected="selected">기본 값 (사용 가능한 항목 기준)</option>
         </select>
+        <select id="img-to">
+            <option value="0" selected="selected">image_to_string</option>
+            <option value="1">image_to_boxes</option>
+            <option value="2">image_to_data</option>
+            <option value="3">image_to_osd</option>
+        </select>
         <select id="colored">
             <option value="0" selected="selected">원본 색상</option>
             <option value="1">흑백 변환</option>
         </select>
         <button id="add-btn">RUN</button>
+        <button id="tesseract-btn">Tesseract</button>
+        <button id="pytesseract-btn">PyTesseract</button>
+        <button id="language-btn">Languages</button>
+        <button id="command-btn">Commands</button>
+
     </div>
-    <div id="snackbar"><span id="snack-message"></span></div>
 </div>
 <div id="result"></div>
+<div id="snackbar"><span id="snack-message"></span></div>
 <script>
     require('./renderer.js')
 </script>

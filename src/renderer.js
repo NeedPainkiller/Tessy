@@ -19,21 +19,6 @@ function runPortManShell(command) {
         .map(data => data.split(','))
 }
 
-function loaderFadeIn() {
-    document.getElementById("loader").style.opacity = 1;
-    document.getElementById("none").style.opacity = 0;
-    document.getElementsByTagName("body")[0].style.pointerEvents = "none"
-}
-
-function loaderFadeOut() {
-    document.getElementById("loader").style.opacity = 0;
-    document.getElementsByTagName("body")[0].style.pointerEvents = "auto";
-
-    if (document.getElementById("list").getElementsByTagName("li").length === 0) {
-        document.getElementById("none").style.opacity = 1
-    }
-}
-
 function showSnackBar(message, time = 3000) {
     let snackbar = document.getElementById("snackbar");
     let messageSpan = document.getElementById("snack-message");
@@ -42,9 +27,16 @@ function showSnackBar(message, time = 3000) {
     setTimeout(() => snackbar.classList.remove("active"), time)
 }
 
+function openLink(link){
+    require('electron').shell.openExternal(link)
+}
 
-document.getElementById("add-btn").onclick = () => addForward();
-// window.onload = () => refresh();
+document.getElementById("add-btn").onclick = () => showSnackBar("test");
+document.getElementById("tesseract-btn").onclick = () => openLink("https://github.com/tesseract-ocr/tesseract/wiki/Downloads");
+document.getElementById("pytesseract-btn").onclick = () => openLink("https://github.com/madmaze/pytesseract");
+document.getElementById("language-btn").onclick = () => openLink("https://github.com/tesseract-ocr/tessdata");
+document.getElementById("command-btn").onclick = () => openLink("https://github.com/tesseract-ocr/tesseract/wiki/Command-Line-Usage");
+
 
 document.getElementById("image-upload").addEventListener("change",
     (e) => {
@@ -65,6 +57,7 @@ function previewImage(file) {
 
     reader.onload = function () {
         thumb.style.backgroundImage = 'url(' + reader.result + ')';
+        document.getElementsByClassName('fa-image')[0].style.opacity = "0";
     }
     reader.readAsDataURL(file);
     thumb.className += ' js--no-default';

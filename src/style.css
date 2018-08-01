@@ -1,7 +1,7 @@
 * {
     font-family: 'Lato';
-    padding: 0;
-    margin: 0;
+    /*padding: 0;*/
+    /*margin: 0;*/
 }
 
 ::-webkit-scrollbar {
@@ -95,6 +95,14 @@ body {
     position: relative;
 }
 
+.fa-image {
+    position: absolute;
+    margin: 19% 21% 20% 21%;
+    font-size: 20em;
+    color: #cccccc;
+    opacity: 1;
+}
+
 #loader {
     position: absolute;
     height: 100%;
@@ -109,14 +117,85 @@ body {
 #tesseract-option {
     width: 50%;
     height: 100%;
+    padding-top: 1%;
     float: right;
     background-color: transparent;
 }
 
-select {
+.forward-input {
+    position: relative;
+    margin: 5% 0 0 .5%;
     width: 92%;
+}
+
+input.option {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #757575;
+}
+
+input.option:focus {
+    outline: none;
+}
+
+label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+/* active state */
+input.option:focus ~ label, input:valid ~ label {
+    top: -20px;
+    font-size: 14px;
+    color: #e6e6e6;
+}
+
+.bar {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding-left: 15px;
+}
+
+.bar:before, .bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #b0392f;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%;
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+    width: 50%;
+}
+
+select {
+    width: 95%;
     padding: 3px 3px 7px 3px;
-    margin: 4% 4% 0 4%;
+    margin: 4% 4% 0 .5%;
     border: 1px solid #ccc;
     color: #e6e6e6;
     background-color: #b83b31;
@@ -131,25 +210,97 @@ select:hover {
     background-color: #b0392f;
 }
 
-#add-btn {
-    width: 300px;
-    height: 80px;
+button {
     outline: none;
     cursor: pointer;
     background: none;
     transition: .5s;
-    font-size: 24px;
     border-radius: 5px;
     font-family: sans-serif;
     position: relative;
-    margin-left: 40px;
     border: 2px solid #ffffff;
     color: #ffffff;
+}
+
+#add-btn {
+    width: 40%;
+    height: 24%;
+    float: right;
+    margin: 4% 4.5%;
+    font-size: 24px;
 }
 
 #add-btn:hover {
     border: none;
     font-size: 28px;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    color: #b83b31;
+    background-color: #ffffff;
+}
+
+#tesseract-btn {
+    width: 23%;
+    height: 10%;
+    float: left;
+    margin: 4% 0 0 1%;
+    font-size: 20px;
+}
+
+#tesseract-btn:hover {
+    border: none;
+    font-size: 22px;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    color: #b83b31;
+    background-color: #ffffff;
+}
+
+#pytesseract-btn {
+    width: 23%;
+    height: 10%;
+    float: left;
+    margin: 4% 0 0 3%;
+    font-size: 20px;
+}
+
+#pytesseract-btn:hover {
+    border: none;
+    font-size: 22px;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    color: #b83b31;
+    background-color: #ffffff;
+}
+
+#language-btn {
+    width: 23%;
+    height: 10%;
+    float: left;
+    margin: 4% 0 0 1%;
+    font-size: 20px;
+}
+
+#language-btn:hover {
+    border: none;
+    font-size: 22px;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    color: #b83b31;
+    background-color: #ffffff;
+}
+
+#command-btn {
+    width: 23%;
+    height: 10%;
+    float: left;
+    margin: 4% 0 0 3%;
+    font-size: 20px;
+}
+
+#command-btn:hover {
+    border: none;
+    font-size: 22px;
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
     color: #b83b31;
@@ -169,7 +320,7 @@ select:hover {
 #snackbar {
     bottom: 0;
     z-index: 3;
-    width: 100%;
+    width: 80%;
     height: 0px;
     line-height: 50px;
     position: absolute;
@@ -177,6 +328,7 @@ select:hover {
     transition: all .3s;
     border-top: 0px;
     overflow: hidden;
+    margin: 0 0 0 10%;
 }
 
 #snackbar.active {

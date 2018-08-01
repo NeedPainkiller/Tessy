@@ -8,7 +8,7 @@ let mainWindow
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 1600, height: 600
+        width: 1600, height: 900
         , resizable: false
         // , maximizable: false
         // ,transparent: true, frame: false
@@ -86,4 +86,4 @@ const menu = Menu.buildFromTemplate([
         ]
     }
 ])
-// Menu.setApplicationMenu(menu)
+Menu.setApplicationMenu(menu)
