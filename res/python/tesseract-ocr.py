@@ -1,6 +1,7 @@
 import cv2 
 import pytesseract
 
+# C:\DEV\MODULE\Tesseract-OCR
 # pytesseract.pytesseract.tesseract_cmd = """"""
 
 def runOcr(img, language, configs):
