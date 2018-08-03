@@ -30,6 +30,7 @@ body {
     height: 70%;
     /*border: 2px solid #1976D2;*/
     background: #dd4e42;
+    transition: opacity .5s linear;
 }
 
 #tesseract-img {
@@ -65,7 +66,8 @@ body {
     background-color: white;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 #box > #js--image-preview::after {
@@ -101,17 +103,6 @@ body {
     font-size: 20em;
     color: #cccccc;
     opacity: 1;
-}
-
-#loader {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 50%;
-    margin-top: -15px;
-    text-align: center;
-    opacity: 0;
-    transition: opacity .5s linear;
 }
 
 #tesseract-option {
@@ -310,12 +301,21 @@ button {
 #result {
     position: relative;
     float: bottom;
-    /*width: 99%;*/
     height: 30%;
-    /*margin: .5%;*/
-    /*border: 2px solid #1976D2;*/
     background: #222222;
 }
+
+#loader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    margin-top: -15px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity .5s linear;
+}
+
 
 #snackbar {
     bottom: 0;

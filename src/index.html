@@ -57,12 +57,6 @@
             <option value="2">기존엔진 + LSTM엔진</option>
             <option value="3" selected="selected">기본 값 (사용 가능한 항목 기준)</option>
         </select>
-        <select id="img-to">
-            <option value="0" selected="selected">image_to_string</option>
-            <option value="1">image_to_boxes</option>
-            <option value="2">image_to_data</option>
-            <option value="3">image_to_osd</option>
-        </select>
         <select id="colored">
             <option value="0" selected="selected">원본 색상</option>
             <option value="1">흑백 변환</option>
@@ -75,7 +69,28 @@
 
     </div>
 </div>
-<div id="result"></div>
+<div id="result">
+    <div id="loader">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+    <rect x="0" y="0" width="4" height="20" fill="#b0392f">
+      <animate attributeName="opacity" attributeType="XML"
+        values="1; .2; 1"
+        begin="0s" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+    <rect x="7" y="0" width="4" height="20" fill="#b0392f">
+      <animate attributeName="opacity" attributeType="XML"
+        values="1; .2; 1"
+        begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+    <rect x="14" y="0" width="4" height="20" fill="#b0392f">
+      <animate attributeName="opacity" attributeType="XML"
+        values="1; .2; 1"
+        begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+  </svg>
+    </div>
+</div>
 <div id="snackbar"><span id="snack-message"></span></div>
 <script>
     require('./renderer.js')
