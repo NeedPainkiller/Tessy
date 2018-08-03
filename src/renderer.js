@@ -1,23 +1,11 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-const shell = require('child_process');
-const Rx = require('./rx')
+const {execFile} = require('child_process');
+const fs = require('fs');
+const Rx = require('./rx');
+let ocrfile;
 
-
-function runPortManShell(command) {
-    return Rx.Observable
-        .fromPromise(new Promise((resolve, reject) => {
-            // shell.spawn('res/portmanshell.exe', command) // in dev environment
-            shell.spawn('resources/app/res/portmanshell.exe', command)
-                .stdout.on('data', (data) => resolve(data.toString()))
-        }))
-        .map(stdout => stdout.split('\\n').splice(5))
-        .flatMap(stdout => stdout.splice(0, stdout.length - 2))
-        .map(data => data.replace(/[\s]{3,}/gi, ","))
-        .map(data => data.replace(/\\r/gi, ""))
-        .map(data => data.split(','))
-}
 
 function showSnackBar(message, time = 3000) {
     let snackbar = document.getElementById("snackbar");
@@ -27,25 +15,28 @@ function showSnackBar(message, time = 3000) {
     setTimeout(() => snackbar.classList.remove("active"), time)
 }
 
-function openLink(link){
-    require('electron').shell.openExternal(link)
+function loaderFadeIn() {
+    document.getElementById("loader").style.opacity = 1;
+    document.getElementsByTagName("body")[0].style.pointerEvents = "none"
+    document.getElementById("main").style.opacity = 0.5;
 }
 
-document.getElementById("add-btn").onclick = () => showSnackBar("test");
-document.getElementById("tesseract-btn").onclick = () => openLink("https://github.com/tesseract-ocr/tesseract/wiki/Downloads");
-document.getElementById("pytesseract-btn").onclick = () => openLink("https://github.com/madmaze/pytesseract");
-document.getElementById("language-btn").onclick = () => openLink("https://github.com/tesseract-ocr/tessdata");
-document.getElementById("command-btn").onclick = () => openLink("https://github.com/tesseract-ocr/tesseract/wiki/Command-Line-Usage");
+function loaderFadeOut() {
+    document.getElementById("loader").style.opacity = 0;
+    document.getElementsByTagName("body")[0].style.pointerEvents = "auto";
+    document.getElementById("main").style.opacity = 1;
+}
 
+
+function openLink(link) {
+    require('electron').shell.openExternal(link)
+}
 
 document.getElementById("image-upload").addEventListener("change",
     (e) => {
         let file = e.currentTarget.files[0];
         let imageType = /image.*/;
-        if (!file.type.match(imageType)) {
-            throw 'Datei ist kein Bild';
-        } else if (!file) {
-            throw 'Kein Bild gewählt';
+        if (!file.type.match(imageType) || !file) {
         } else {
             previewImage(file);
         }
@@ -55,10 +46,42 @@ function previewImage(file) {
     let thumb = document.getElementById("js--image-preview"),
         reader = new FileReader();
 
+    // fs.createReadStream(file.path).pipe(fs.createWriteStream('res/temp/ocr.png'));
     reader.onload = function () {
         thumb.style.backgroundImage = 'url(' + reader.result + ')';
         document.getElementsByClassName('fa-image')[0].style.opacity = "0";
-    }
+    };
     reader.readAsDataURL(file);
     thumb.className += ' js--no-default';
+    ocrfile = file
 }
+
+
+document.getElementById("add-btn").onclick = () => {
+
+    if (!ocrfile) {
+        showSnackBar("PLZ SELECT Image")
+        return
+    }
+
+    // let tessPath = document.getElementById("tesseract-path").value || "C:\\Program Files\n(x86)\\Tesseract-OCR\\tesseract";
+    let tessPath = document.getElementById("tesseract-path").value || "C:\\DEV\\MODULE\\Tesseract-OCR\\tesseract";
+    let language = document.getElementById("tesseract-language").value || "eng";
+    let psm = document.getElementById("psm").value;
+    let oem = document.getElementById("oem").value;
+    let colored = document.getElementById("colored").value
+    loaderFadeIn()
+    Rx.Observable.fromPromise(new Promise((resolve, reject) => {
+            execFile("res/python/tesseract-ocr.exe", [tessPath, language, psm, oem, colored, ocrfile.path], (error, stdout, stderr) => {
+                if (error || stderr) reject(error);
+                else resolve(stdout.toString())
+            })
+        })
+    ).subscribe((data) => console.log(data),
+        (err) => console.log('Error: %s', err),
+        () => loaderFadeOut())
+};
+document.getElementById("tesseract-btn").onclick = () => openLink("https://github.com/tesseract-ocr/tesseract/wiki/Downloads");
+document.getElementById("pytesseract-btn").onclick = () => openLink("https://github.com/madmaze/pytesseract");
+document.getElementById("language-btn").onclick = () => openLink("https://github.com/tesseract-ocr/tessdata");
+document.getElementById("command-btn").onclick = () => openLink("https://github.com/tesseract-ocr/tesseract/wiki/Command-Line-Usage");
