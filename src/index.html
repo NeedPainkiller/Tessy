@@ -27,19 +27,24 @@
         <div class="forward-input">
             <input type="text" class="option" id="tesseract-path" required>
             <span class="bar"></span>
-            <label>&nbsp<i class="fas fa-folder-open"></i>&nbsp Tesseract path (C:\Program Files
+            <label>&nbsp<i class="fas fa-folder-open"></i>&nbsp Tesseract path
+                (C:\Program Files
                 (x86)\Tesseract-OCR\tesseract)</label>
         </div>
         <div class="forward-input">
-            <input type="text" class="option" i id="tesseract-language" required>
+            <input type="text" class="option" i id="tesseract-language"
+                   required>
             <span class="bar"></span>
-            <label>&nbsp<i class="fas fa-globe"></i>&nbsp&nbsp Language (Default : eng)</label>
+            <label>&nbsp<i class="fas fa-globe"></i>&nbsp&nbsp Language (Default
+                : eng)</label>
         </div>
         <select id="psm">
             <option value="0">방향 및 스크립트 감지(OSD)</option>
             <option value="1">OSD로 자동 페이지 분할</option>
             <option value="2">자동 페이지 분할. OSD나 OCR은 없음</option>
-            <option value="3" selected="selected">완전히 자동으로 페이지 분할, OSD 없음.(기본 값)</option>
+            <option value="3" selected="selected">완전히 자동으로 페이지 분할, OSD 없음.(기본
+                값)
+            </option>
             <option value="4">가변적인 크기의 1라인 텍스트</option>
             <option value="5">수직 텍스트</option>
             <option value="6">텍스트의 균일한 단일 블록을 가정</option>
@@ -70,6 +75,7 @@
     </div>
 </div>
 <div id="result">
+    <p id="console"></p>
     <div id="loader">
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
      width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
@@ -91,7 +97,9 @@
   </svg>
     </div>
 </div>
-<div id="snackbar"><span id="snack-message"></span></div>
+<div id="snackbar">
+    <span id="snack-message"></span>
+</div>
 <script>
     require('./renderer.js')
 </script>

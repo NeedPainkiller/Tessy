@@ -316,6 +316,14 @@ button {
     transition: opacity .5s linear;
 }
 
+#console {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: x-large;
+    margin: 0;
+    padding: 1%;
+}
 
 #snackbar {
     bottom: 0;
