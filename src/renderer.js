@@ -75,6 +75,7 @@ function runOcr() {
     console.log([tessPath, language, psm, oem, colored, ocrfile.path])
     return Rx.Observable.fromPromise(new Promise((resolve, reject) => {
             execFile("res/python/tesseract-ocr.exe", [tessPath, language, psm, oem, colored, ocrfile.path], (error, stdout, stderr) => {
+            // execFile("resources/app/res/python/tesseract-ocr.exe", [tessPath, language, psm, oem, colored, ocrfile.path], (error, stdout, stderr) => {
                 if (error || stderr) reject(error)
                 else resolve(stdout.toString())
             })

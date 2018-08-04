@@ -30,6 +30,7 @@ npm run start
 ```shell
 npm run build
 ```
+[Download it!](https://drive.google.com/file/d/1Ll6S7uiqgkDRqLmwzbVsIzofer7e_JU9/view?usp=sharing)
 
 ## Use Library
 [electron](https://electronjs.org/)
