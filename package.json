@@ -21,7 +21,7 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "asar": "^0.13.0",
-    "electron": "^2.0.0",
+    "electron": "^9.1.0",
     "electron-packager": "^8.7.1"
   },
   "build": {
